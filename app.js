@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const copyBtn = document.getElementById("copyBtn");
   const themeToggle = document.getElementById("themeToggle");
 
-  // Theme Toggle
   themeToggle.addEventListener("change", (e) => {
     document.body.classList.toggle("theme-cyber", e.target.checked);
     document.body.classList.toggle("theme-modern", !e.target.checked);
@@ -36,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // UI Loading State
     checkBtn.disabled = true;
     checkBtn.textContent = "جاري التحقق... (Checking)";
     
@@ -63,33 +61,28 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await res.json();
       resultSection.classList.remove("hidden");
 
-      // --- معالجة النتائج ---
       const pFake = data.p_fake || 0;
       
-      // تحديد التسمية واللون
       if (data.label === "fake") {
         resultLabel.innerHTML = "⛔ مزيف (FAKE)";
-        resultLabel.style.color = "#ef4444"; // أحمر
+        resultLabel.style.color = "#ef4444";
       } else if (data.label === "suspicious") {
         resultLabel.innerHTML = "⚠️ مشبوه (SUSPICIOUS)";
-        resultLabel.style.color = "#f59e0b"; // برتقالي
+        resultLabel.style.color = "#f59e0b";
       } else {
         resultLabel.innerHTML = "✅ حقيقي (REAL)";
-        resultLabel.style.color = "#16a34a"; // أخضر
+        resultLabel.style.color = "#16a34a";
       }
 
-      // عرض نسبة الثقة
       let confidenceDisplay = data.final_score;
       finalScoreText.textContent = Math.round(confidenceDisplay * 100) + "%";
       pFakeEl.textContent = Number(pFake).toFixed(2);
       
       srcScoreEl.textContent = data.source_score ? Number(data.source_score).toFixed(2) : "-";
 
-      // --- عرض الأدلة (Evidence) ---
       evidenceList.innerHTML = "";
       if (data.evidence && data.evidence.length > 0) {
         data.evidence.forEach(e => {
-          // e = [title, similarity_score, stance]
           const li = document.createElement("li");
           const simScore = (e[1] * 100).toFixed(1);
           
@@ -106,7 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
         evidenceList.innerHTML = "<li style='color:#777; font-style:italic;'>لم يتم العثور على مقالات مشابهة في المصادر الموثوقة (تم الاعتماد على تحليل الذكاء الاصطناعي).</li>";
       }
 
-      // --- عرض الكلمات المفتاحية (Terms) ---
       termsList.innerHTML = "";
       if (data.top_terms && data.top_terms.length > 0) {
         data.top_terms.forEach(t => {
@@ -118,7 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
         termsList.innerHTML = "<li>—</li>";
       }
 
-      // تمرير الشاشة للنتائج
       resultSection.scrollIntoView({ behavior: 'smooth' });
 
     } catch (err) {
