@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>كاشف الأخبار | Fake News Agent</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="theme-modern">
+  <header class="topbar">
+    <div class="brand">
+      <h1>كاشف الأخبار (Fake News Agent)</h1>
+      <p class="tag">التحقق السريع باستخدام الذكاء الاصطناعي وقاعدة المعرفة</p>
+    </div>
+    <div class="controls">
+      <div class="switch-container">
+        <span class="label-text">وضع السايبر</span>
+        <label class="switch">
+          <input id="themeToggle" type="checkbox">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card input-card">
+      <h2>فحص المقال (Check Article)</h2>
+      <textarea id="articleText" placeholder="ضع نص الخبر أو العنوان هنا... (Paste article text here)"></textarea>
+      
+      <div class="input-group">
+        <input id="sourceDomain" placeholder="نطاق المصدر (اختياري) e.g. bbc.com">
+        <select id="langHint">
+          <option value="">اللغة (تلقائي)</option>
+          <option value="ar">العربية</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+
+      <div class="actions-row">
+        <button id="checkBtn" class="btn primary">تحقق (Verify)</button>
+        <button id="clearBtn" class="btn ghost">مسح</button>
+      </div>
+    </section>
+
+    <section id="resultSection" class="card result-card hidden">
+      <div class="result-header">
+        <div>
+          <h3 id="resultLabel">—</h3>
+          <div class="sub" id="scoreBar">نسبة الثقة: <span id="finalScoreText">0%</span></div>
+        </div>
+        <div class="actions">
+          <button id="copyBtn" class="btn small">نسخ</button>
+        </div>
+      </div>
+
+      <div class="badges">
+        <span title="احتمالية التزييف">Fake Prob: <strong id="pFake">0.00</strong></span>
+        <span title="تقييم المصدر">Source: <strong id="srcScore">0.00</strong></span>
+      </div>
+
+      <div class="panels">
+        <div class="panel evidence">
+          <h4>🔎 الأدلة المطابقة (Knowledge Base)</h4>
+          <ul id="evidenceList"></ul>
+        </div>
+        <div class="panel terms">
+          <h4>🔠 أهم الكلمات (Top Terms)</h4>
+          <ul id="termsList"></ul>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <small> نموذج تجريبي - تم التطوير بواسطة: BERT Deep Learning + Newsapi + Google news api <br> نمي سعيد الغامدي
+       <br> عبدالعزيز احمد الغامدي
+       <br> عبدالله فيصل الغامدي
+        
+      </small>
+    </footer>
+  </main>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
